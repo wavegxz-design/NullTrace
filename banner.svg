@@ -1,0 +1,78 @@
+<svg width="100%" viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .nt-t { font-family:'Orbitron','Share Tech Mono',monospace; font-weight:900; font-size:76px; letter-spacing:.07em; }
+      .nt-s { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.22em; }
+      .nt-m { font-family:'Share Tech Mono',monospace; font-size:13px; letter-spacing:.11em; }
+      @keyframes nt-gr{0%,87%,100%{opacity:0;transform:none}88%{opacity:.8;transform:translateX(-5px)}90%{opacity:0}93%{opacity:.5;transform:translateX(5px)}95%{opacity:0}}
+      @keyframes nt-gc{0%,87%,100%{opacity:0;transform:none}89%{opacity:.7;transform:translateX(5px)}91%{opacity:0}94%{opacity:.4;transform:translateX(-4px)}96%{opacity:0}}
+      @keyframes nt-fl{0%,87%,100%{transform:none}88%{transform:skew(-1deg)}90%{transform:skew(1deg) translateX(4px)}92%{transform:none}94%{transform:skew(-.7deg) translateX(-2px)}96%{transform:none}}
+      @keyframes nt-blink{50%{opacity:0}}
+      @keyframes nt-dot{0%,100%{opacity:1}50%{opacity:.15}}
+      @keyframes nt-scan{0%{transform:translateY(-50px)}100%{transform:translateY(380px)}}
+      @keyframes nt-pulse{0%,100%{r:4}50%{r:2.5}}
+      .nt-gr{animation:nt-gr 9s 2.5s infinite}
+      .nt-gc{animation:nt-gc 9s 2.58s infinite}
+      .nt-mn{animation:nt-fl 9s 2.5s infinite}
+      .nt-cur{animation:nt-blink 1s step-end infinite}
+      .nt-dot{animation:nt-dot 2.1s infinite}
+      .nt-sc{animation:nt-scan 5s linear infinite}
+    </style>
+    <pattern id="nt-dots" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="rgba(0,207,255,0.05)"/>
+    </pattern>
+    <pattern id="nt-scl" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="2" width="1200" height="2" fill="rgba(0,0,0,0.11)"/>
+    </pattern>
+    <radialGradient id="nt-gm" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="white" stop-opacity="1"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="nt-dm"><rect width="1200" height="320" fill="url(#nt-gm)"/></mask>
+    <clipPath id="nt-cr"><rect x="0" y="128" width="1200" height="44"/></clipPath>
+    <clipPath id="nt-cc"><rect x="0" y="170" width="1200" height="42"/></clipPath>
+    <filter id="nt-glow"><feGaussianBlur stdDeviation="6" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+  </defs>
+
+  <rect width="1200" height="320" fill="#020810"/>
+  <rect width="1200" height="320" fill="url(#nt-dots)" mask="url(#nt-dm)"/>
+  <rect width="1200" height="320" fill="url(#nt-scl)"/>
+  <rect class="nt-sc" x="0" y="0" width="1200" height="45" fill="rgba(0,180,255,0.03)"/>
+
+  <!-- Frame -->
+  <line x1="60" y1="36" x2="60" y2="284" stroke="#00cfff" stroke-width=".8" opacity=".2"/>
+  <line x1="1140" y1="36" x2="1140" y2="284" stroke="#00cfff" stroke-width=".8" opacity=".2"/>
+  <path d="M60 36 L60 64 M60 36 L102 36" stroke="#00cfff" stroke-width="1.8" fill="none" opacity=".75"/>
+  <path d="M1140 36 L1140 64 M1140 36 L1098 36" stroke="#00cfff" stroke-width="1.8" fill="none" opacity=".75"/>
+  <path d="M60 284 L60 256 M60 284 L102 284" stroke="#00cfff" stroke-width="1.8" fill="none" opacity=".75"/>
+  <path d="M1140 284 L1140 256 M1140 284 L1098 284" stroke="#00cfff" stroke-width="1.8" fill="none" opacity=".75"/>
+
+  <!-- Badge -->
+  <rect x="430" y="44" width="340" height="22" fill="rgba(0,207,255,0.07)" rx="1"/>
+  <text class="nt-m" x="600" y="59" text-anchor="middle" fill="#00cfff" opacity=".85">// WEB RECON &amp; INTELLIGENCE TOOLKIT //</text>
+
+  <!-- Glitch + main title -->
+  <text class="nt-t" x="600" y="184" text-anchor="middle" fill="#00cfff" opacity=".15" filter="url(#nt-glow)">NullTrace</text>
+  <text class="nt-t nt-gr" x="600" y="184" text-anchor="middle" fill="#ff44ff" opacity="0" clip-path="url(#nt-cr)">NullTrace</text>
+  <text class="nt-t nt-gc" x="600" y="184" text-anchor="middle" fill="#00cfff" opacity="0" clip-path="url(#nt-cc)">NullTrace</text>
+  <text class="nt-t nt-mn" x="600" y="184" text-anchor="middle" fill="#00cfff">NullTrace</text>
+
+  <!-- Divider -->
+  <line x1="200" y1="200" x2="1000" y2="200" stroke="rgba(0,207,255,.15)" stroke-width=".5"/>
+  <line x1="565" y1="200" x2="635" y2="200" stroke="#00cfff" stroke-width="1.6" opacity=".8"/>
+
+  <!-- Subtitle -->
+  <text class="nt-s" x="600" y="232" text-anchor="middle" fill="#c8f0ff" opacity=".42">Port Scan · CMS Detect · WP Enum · Server Recon · SQL Probe</text>
+
+  <!-- Bottom row -->
+  <circle class="nt-dot" cx="84" cy="267" r="4" fill="#00cfff"/>
+  <text class="nt-m" x="96" y="271" fill="#00cfff" opacity=".7">ONLINE</text>
+  <text class="nt-m" x="188" y="271" fill="rgba(180,230,255,.3)">author:</text>
+  <text class="nt-m" x="256" y="271" fill="rgba(180,230,255,.65)">krypthane</text>
+  <text class="nt-m" x="600" y="271" text-anchor="middle" fill="rgba(0,207,255,.38)">v1.0 · python 3 · ethical use only</text>
+  <text class="nt-m" x="942" y="271" fill="rgba(180,230,255,.3)">github:</text>
+  <text class="nt-m" x="1012" y="271" fill="rgba(180,230,255,.65)">wavegxz-design</text>
+
+  <!-- Prompt -->
+  <text class="nt-m" x="84" y="300" fill="#00cfff" opacity=".32">$ python3 nulltrace.py<tspan class="nt-cur" fill="#00cfff" opacity=".6">▌</tspan></text>
+</svg>

@@ -1,0 +1,7 @@
+# NullTrace — requirements.txt
+# Pure stdlib — no external dependencies required.
+# All imports (socket, urllib, http.client, threading, re) are built-in.
+#
+# Optional enhancements:
+# requests>=2.31.0    # faster HTTP, if you prefer requests over urllib
+# colorama>=0.4.6     # Windows color support

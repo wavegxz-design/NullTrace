@@ -11,6 +11,7 @@
 # ║                                                                 ║
 # ║   Bugs fixed:                                                   ║
 # ║   [BUG-01] Full Python 2→3 migration (urllib2,raw_input,etc)   ║
+# ║   [BUG-16] urlopen() without context manager → fd leak × 3     ║
 # ║   [BUG-02] unique() defined 3x → single utility function       ║
 # ║   [BUG-03] bing_all_grabber() defined 3x → single function     ║
 # ║   [BUG-04] check_wordpress() defined 2x → deduplicated         ║
@@ -129,8 +130,10 @@ def check_wordpress(sites: list) -> list:
     wp = []
     for site in sites:
         try:
-            if urlopen(site + "wp-login.php", timeout=NET_TIMEOUT).getcode() == 200:
-                wp.append(site)
+            # FIX: context manager prevents fd leak on repeated calls
+            with urlopen(site + "wp-login.php", timeout=NET_TIMEOUT) as resp:
+                if resp.getcode() == 200:
+                    wp.append(site)
         except Exception:
             pass
     return wp
@@ -141,8 +144,9 @@ def check_joomla(sites: list) -> list:
     joomla = []
     for site in sites:
         try:
-            if urlopen(site + "administrator", timeout=NET_TIMEOUT).getcode() == 200:
-                joomla.append(site)
+            with urlopen(site + "administrator", timeout=NET_TIMEOUT) as resp:
+                if resp.getcode() == 200:
+                    joomla.append(site)
         except Exception:
             pass
     return joomla
@@ -245,12 +249,13 @@ def server_banner():
         return
     url = target if target.startswith("http") else f"http://{target}"
     try:
-        resp = urlopen(url, timeout=NET_TIMEOUT)
-        banner = resp.headers.get("Server", "N/A")
-        powered = resp.headers.get("X-Powered-By", "N/A")
-        print(C.G  + f"\n  [+] Server      : {banner}" + C.RS)
-        print(C.G  + f"  [+] X-Powered-By: {powered}" + C.RS)
-        print(C.DM + f"  [i] Status      : {resp.getcode()}" + C.RS)
+        # FIX: context manager prevents fd leak
+        with urlopen(url, timeout=NET_TIMEOUT) as resp:
+            banner = resp.headers.get("Server", "N/A")
+            powered = resp.headers.get("X-Powered-By", "N/A")
+            print(C.G  + f"\n  [+] Server      : {banner}" + C.RS)
+            print(C.G  + f"  [+] X-Powered-By: {powered}" + C.RS)
+            print(C.DM + f"  [i] Status      : {resp.getcode()}" + C.RS)
     except Exception as e:
         print(C.R + f"\n  [!] Error: {e}" + C.RS)
 
